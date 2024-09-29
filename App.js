@@ -1,15 +1,16 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import ManageExpense from "./screens/ManageExpense";
-import RecentExpense from "./screens/RecentExpense";
-import AllExpenses from "./screens/AllExpenses";
-import { StyleSheet } from "react-native";
-import { GlobalStyles } from "./constants/styles";
 import { Ionicons } from "@expo/vector-icons";
+
+import ManageExpense from "./screens/ManageExpense";
+import AllExpenses from "./screens/AllExpenses";
+import RecentExpenses from "./screens/RecentExpense";
+import { GlobalStyles } from "./constants/styles";
+import IconButton from "./components/UI/IconButton";
+
 import ExpensesContextProvider from "./store/expenses-context";
-import IconButton from "./components/ui/IconButton";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -22,11 +23,11 @@ function ExpensesOverview() {
         headerTintColor: "white",
         tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500 },
         tabBarActiveTintColor: GlobalStyles.colors.accent500,
-        headerRight: () => (
+        headerRight: ({ tintColor }) => (
           <IconButton
             icon="add"
             size={24}
-            color="#fff"
+            color={tintColor}
             onPress={() => {
               navigation.navigate("ManageExpense");
             }}
@@ -36,7 +37,7 @@ function ExpensesOverview() {
     >
       <BottomTabs.Screen
         name="RecentExpenses"
-        component={RecentExpense}
+        component={RecentExpenses}
         options={{
           title: "Recent Expenses",
           tabBarLabel: "Recent",
@@ -60,7 +61,7 @@ function ExpensesOverview() {
   );
 }
 
-function App() {
+export default function App() {
   return (
     <>
       <StatusBar style="light" />
@@ -81,7 +82,6 @@ function App() {
               name="ManageExpense"
               component={ManageExpense}
               options={{
-                title: "Manage Expense",
                 presentation: "modal",
               }}
             />
@@ -91,6 +91,3 @@ function App() {
     </>
   );
 }
-export default App;
-
-const styles = StyleSheet.create({});

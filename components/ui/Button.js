@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, View, Text } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 
 function Button({ children, onPress, mode, style }) {
@@ -30,10 +30,9 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   buttonText: {
-    color: "#fff",
+    color: "white",
     textAlign: "center",
   },
-
   flatText: {
     color: GlobalStyles.colors.primary200,
   },
